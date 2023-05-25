@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  lucky:
+    build: .
+    ports:
+      - "8001:8081"
+    environment:
+      - USER_SERVICE_URL=http://users:8080/
+  users:
+    image: user-image-compose
+    ports:
+      - "8000:8080"
+    environment:
+      - DB_PASSWORD=${DB_PASSWORD}
+      - MYSQL_HOST=host.docker.internal
